@@ -1,0 +1,149 @@
+@ECHO OFF
+SETLOCAL ENABLEDELAYEDEXPANSION
+COLOR 0F
+REM ============================================================
+REM Author:  Bryan A
+REM Coded:   28/08/2018   
+REM Version: 0.0.1  (Concept)
+REM Tested:  Windows 7, 10
+REM Basic:   Icon and link only
+REM
+REM Purpose: For modular construction of batch files
+REM          and/or standalone testing. Requires:
+REM Input 1: String "Filename Visual Basic Script"
+REM Input 2: String "Location to program"
+REM Input 3: String "Location to icon for program"
+REM Output:  String as Code 
+REM          
+REM ============================================================
+REM
+:CHECK INPUT
+IF [%1] == [] GOTO ERROR_NO_ARG_ONE
+IF %1 == ^? GOTO SHOW_HELP
+IF [%2] == [] GOTO ERROR_NO_ARG_TWO
+IF [%3] == [] GOTO ERROR_NO_ARG_THREE
+IF NOT EXIST %2 GOTO FEEDBACK_PROGRAM_NOT_EXIST
+IF NOT EXIST %3 GOTO FEEDBACK_ICON_NOT_EXIST
+
+REM -----------------------------------------------------------
+REM Variables no longer enclosed in ""
+REM Reference:  
+REM Remove Quotes from a string
+REM Available from: https://ss64.com/nt/syntax-dequote.html
+REM Set _somevariable=%_somevariable:"=%
+REM Accessed 26/01/2014
+REM -----------------------------------------------------------
+:DEQUOTE
+SET _VBS=%1
+SET _VBS=%_VBS:"=%
+SET _PROGRAM=%2
+SET _PROGRAM=%_PROGRAM:"=%
+SET _ICON=%3
+SET _ICON=%__ICON:"=%
+
+REM -----------------------------------------------------------
+REM Construct desktop shortcut
+REM Reference:
+REM Create or edit a Windows Shortcut
+REM Available from: https://ss64.com/vb/shortcut.html
+REM Accessed 26/01/2014
+REM -----------------------------------------------------------
+:CREATE_SHORTCUT
+@ECHO 0#CODE UNDER DEVELOPMENT#NUL
+GOTO EOF
+
+> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO set WSobj = WScript.CreateObject("WScript.Shell")
+>> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO tmpLink = "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\COMPILE\%_VBS%"
+>> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO set objLink = WSobj.CreateShortcut(tmpLink)
+>> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO objLink.TargetPath = "%_PROGRAM%"
+>> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO objLink.IconLocation = "%_ICON%"
+>> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO objLink.Save
+
+@ECHO 0#%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%#NUL
+
+:EOF
+EXIT /B
+
+
+REM -----------------------------------------------------------
+REM Display Help
+REM -----------------------------------------------------------
+:SHOW_HELP
+CLS
+COLOR 0B
+@ECHO ============================================================
+@ECHO 0000_CREATE-SHORTCUT.BAT
+@ECHO Author:  Bryan A
+@ECHO Version: 0.0.1
+@ECHO ============================================================
+@ECHO Returns 0#SHORTCUT_CREATED#NUL or 
+@ECHO         1#ERROR_REASON#NUL
+@ECHO.
+@ECHO Use of script:
+@ECHO.
+@ECHO    0000_CREATE-SHORTCUT.BAT "STRINGA" "STRINGB" "STRINGC"
+@ECHO.
+@ECHO    STRINGA:     "Enclosed in quotes the saved location for vbs" or 
+@ECHO                 ?  for help
+@ECHO    STRINGB:     "Enclosed in quotes the path/program to be linked"
+@ECHO    STRINGC:     "Enclosed in quotes the path/program icon to be linked"
+@ECHO.
+@ECHO    INPUT Delimiter:  Space
+@ECHO.
+@ECHO    OUTPUT:      ECHO back as:
+@ECHO                 CODE#VALUE#NUL
+@ECHO.
+@ECHO    Delimiter:   #  (allows string processing)
+@ECHO    Where
+@ECHO         CODE=   0  VALUE= No error generated
+@ECHO         CODE=   1  VALUE= Error due to code parameters
+@ECHO         CODE=   2  VALUE= Error due to incorrect input(s)
+@ECHO.
+@ECHO         NUL=    To avoid extra spaces being returned
+@ECHO.
+@ECHO   Press any key to quit.
+@ECHO.
+@ECHO ============================================================
+PAUSE>NUL       
+GOTO EOF
+
+
+REM -----------------------------------------------------------
+REM Code to echo error caused by incorrect input
+REM 1#Information#NUL
+REM -----------------------------------------------------------
+:FEEDBACK_PROGRAM_NOT_EXIST
+CLS
+COLOR 1B
+@ECHO 1#PROGRAM NOT EXIST#NUL
+GOTO EOF
+
+:FEEDBACK_ICON_NOT_EXIST
+CLS
+COLOR 1B
+@ECHO 1#ICON NOT EXIST#NUL
+GOTO EOF
+
+
+REM -----------------------------------------------------------
+REM Code to echo errors from lack of inputs
+REM 2#Error#NUL
+REM -----------------------------------------------------------
+:ERROR_NO_ARG_ONE
+CLS
+COLOR 0F
+@ECHO 2#NO ARGUMENTS GIVEN#NUL
+GOTO EOF
+
+:ERROR_NO_ARG_TWO
+CLS
+COLOR 0F
+@ECHO 2#NO TARGET PROGRAM#NUL
+GOTO EOF
+
+:ERROR_NO_ARG_THREE
+CLS
+COLOR 0F
+@ECHO 2#NO TARGET PROGRAM ICON#NUL
+GOTO EOF
+
