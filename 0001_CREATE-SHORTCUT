@@ -2,9 +2,9 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 COLOR 0F
 REM ============================================================
-REM Author:  Bryan A
+REM Author:  brya-n
 REM Coded:   28/08/2018   
-REM Version: 0.0.1  (Concept)
+REM Version: 0.0.2  (Concept)
 REM Tested:  Windows 7, 10
 REM Basic:   Icon and link only
 REM
