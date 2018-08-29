@@ -57,8 +57,8 @@ CLS
 COLOR 0B
 @ECHO ============================================================
 @ECHO 0000_GET-IP.BAT
-@ECHO Author:  Bryan A
-@ECHO Version: 0.0.1
+@ECHO Author:  bray-n
+@ECHO Version: 0.0.2
 @ECHO ============================================================
 @ECHO Returns the IP address for a network which is accessible
 @ECHO as a delimited string, or an error code 
