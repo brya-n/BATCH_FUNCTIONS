@@ -4,7 +4,7 @@ COLOR 0F
 REM ============================================================
 REM Author:  brya-n
 REM Coded:   24/08/2018   
-REM Version: 0.0.1  (Works as standalone batch file)
+REM Version: 0.0.2  (Works as standalone batch file)
 REM Tested:  Windows 7, 10
 REM To do:   Refactor :IF_FOUND into :CONTINUE
 REM
