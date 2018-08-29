@@ -73,8 +73,8 @@ CLS
 COLOR 0B
 @ECHO ============================================================
 @ECHO 0000_CREATE-SHORTCUT.BAT
-@ECHO Author:  Bryan A
-@ECHO Version: 0.0.1
+@ECHO Author:  bray-n
+@ECHO Version: 0.0.2
 @ECHO ============================================================
 @ECHO Returns 0#SHORTCUT_CREATED#NUL or 
 @ECHO         1#ERROR_REASON#NUL
