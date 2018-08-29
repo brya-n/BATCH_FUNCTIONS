@@ -2,7 +2,7 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 COLOR 0F
 REM ============================================================
-REM Author:  Bryan A
+REM Author:  brya-n
 REM Coded:   24/08/2018   
 REM Version: 0.0.1  (Works as standalone batch file)
 REM Tested:  Windows 7, 10
@@ -10,8 +10,8 @@ REM To do:   Refactor :IF_FOUND into :CONTINUE
 REM
 REM Purpose: For modular construction of batch files
 REM          and/or standalone testing. Requires:
-REM Input 1: integer (4 or 6) or ? for help
-REM Input 2: string (logical_network_name)
+REM Input 1: Character (4 or 6) or ? for help
+REM Input 2: String (logical_network_name)
 REM Output:  CODE#VALUE#NUL
 REM          Output can be delimited using #
 REM          
