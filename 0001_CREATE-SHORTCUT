@@ -4,7 +4,8 @@ COLOR 0F
 REM ============================================================
 REM Author:  brya-n
 REM Coded:   28/08/2018   
-REM Version: 0.0.2  (Concept)
+REM Version: 1.0.0  (Standardisation)
+REM Previous: 0.0.2  (Concept)
 REM Tested:  Windows 7, 10
 REM Basic:   Icon and link only
 REM
@@ -59,7 +60,7 @@ GOTO EOF
 >> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO objLink.IconLocation = "%_ICON%"
 >> "%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%" ECHO objLink.Save
 
-@ECHO 0#%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%#NUL
+@ECHO 1#%HOMEDRIVE%%HOMEPATH%\0001_CREATE-SHORTCUT\CONFIG\%_VBS%#"Run using cscript.exe"#NUL
 
 :EOF
 EXIT /B
@@ -95,9 +96,11 @@ COLOR 0B
 @ECHO.
 @ECHO    Delimiter:   #  (allows string processing)
 @ECHO    Where
-@ECHO         CODE=   0  VALUE= No error generated
-@ECHO         CODE=   1  VALUE= Error due to code parameters
-@ECHO         CODE=   2  VALUE= Error due to incorrect input(s)
+@ECHO         CODE=   0  VALUE= Exception generated
+@ECHO         CODE=   1  VALUE= No exception generated
+@ECHO.
+@ECHO    Exception example:
+@ECHO         0#0#"No supplied argument."#NUL
 @ECHO.
 @ECHO         NUL=    To avoid extra spaces being returned
 @ECHO.
@@ -115,13 +118,13 @@ REM -----------------------------------------------------------
 :FEEDBACK_PROGRAM_NOT_EXIST
 CLS
 COLOR 1B
-@ECHO 1#PROGRAM NOT EXIST#NUL
+@ECHO 0#4#"PROGRAM NOT EXIST"#NUL
 GOTO EOF
 
 :FEEDBACK_ICON_NOT_EXIST
 CLS
 COLOR 1B
-@ECHO 1#ICON NOT EXIST#NUL
+@ECHO 0#5#"ICON NOT EXIST"#NUL
 GOTO EOF
 
 
@@ -132,18 +135,18 @@ REM -----------------------------------------------------------
 :ERROR_NO_ARG_ONE
 CLS
 COLOR 0F
-@ECHO 2#NO ARGUMENTS GIVEN#NUL
+@ECHO 0#0#"NO ARGUMENTS GIVEN"#NUL
 GOTO EOF
 
 :ERROR_NO_ARG_TWO
 CLS
 COLOR 0F
-@ECHO 2#NO TARGET PROGRAM#NUL
+@ECHO 0#2#"NO TARGET PROGRAM"#NUL
 GOTO EOF
 
 :ERROR_NO_ARG_THREE
 CLS
 COLOR 0F
-@ECHO 2#NO TARGET PROGRAM ICON#NUL
+@ECHO 0#3#"NO TARGET PROGRAM ICON"#NUL
 GOTO EOF
 
