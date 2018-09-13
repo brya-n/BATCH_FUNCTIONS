@@ -4,7 +4,9 @@ COLOR 0F
 REM ============================================================
 REM Author:  brya-n
 REM Coded:   24/08/2018   
-REM Version: 0.0.2  (Works as standalone batch file)
+REM Version  1.0.0  (Standardising return codes)
+REM
+REM Previous:0.0.2  (Works as standalone batch file)
 REM Tested:  Windows 7, 10
 REM To do:   Refactor :IF_FOUND into :CONTINUE
 REM
@@ -42,7 +44,7 @@ REM 0#IP Address#NUL
 REM -----------------------------------------------------------
 :IP_FOUND
 FOR /F "tokens=1,2,3,4 delims=: " %%B IN ('PING -n 1 -l 65000 %2 -%1 ^| FINDSTR /C:"Ping statistics"') DO (
-   @ECHO 0#%%E#NUL
+   @ECHO 1#%%E#"IPv%1 ADDRESS"#NUL
 )
 
 :EOF
@@ -58,7 +60,7 @@ COLOR 0B
 @ECHO ============================================================
 @ECHO 0000_GET-IP.BAT
 @ECHO Author:  bray-n
-@ECHO Version: 0.0.2
+@ECHO Version: 1.0.0
 @ECHO ============================================================
 @ECHO Returns the IP address for a network which is accessible
 @ECHO as a delimited string, or an error code 
@@ -78,10 +80,12 @@ COLOR 0B
 @ECHO.
 @ECHO    Delimiter:   #  (allows string processing)
 @ECHO    Where
-@ECHO         CODE=   0  VALUE= Result of network found
-@ECHO         CODE=   1  VALUE= Feedback for network not found
-@ECHO         CODE=   2  VALUE= Error from input
+@ECHO         CODE=   0  Exception raised
+@ECHO         CODE=   1  VALUE= Result of network found
 @ECHO.
+@ECHO    Exception examples
+@ECHO         0#0#"No supplied argument."#NUL
+@ECHO.   
 @ECHO         NUL=    To avoid extra spaces being returned
 @ECHO.
 @ECHO   Press any key to quit.
@@ -98,7 +102,7 @@ REM -----------------------------------------------------------
 :FEEDBACK_NETWORK_NOT_RECOGNISED
 CLS
 COLOR 1B
-@ECHO 1#IPv%1 PING COULD NOT FIND %2#NUL
+@ECHO 0#2#"IPv%1 PING COULD NOT FIND %2"#NUL
 GOTO EOF
 
 
@@ -109,17 +113,17 @@ REM -----------------------------------------------------------
 :ERROR_NO_ARG
 CLS
 COLOR 0F
-@ECHO 2#NO ARGUMENTS GIVEN#NUL
+@ECHO 0#0#"NO ARGUMENTS GIVEN"#NUL
 GOTO EOF
 
 :ERROR_NO_DEFINED_NETWORK
 CLS
 COLOR 0F
-@ECHO 2#NO NETWORK SUPPLIED#NUL
+@ECHO 0#3#"NO NETWORK SUPPLIED"#NUL
 GOTO EOF
 
 :ERROR_IP_PROTOCOL
 CLS
 COLOR 0F
-@ECHO 2#IPv%1 NOT RECOGNISED#NUL
+@ECHO 0#4#"IPv%1 NOT RECOGNISED"#NUL
 GOTO EOF
